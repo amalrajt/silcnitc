@@ -1,0 +1,3 @@
+ gcc y.tab.c lex.yy.c globalsymboltable.c typetable.c -o xpl
+ gcc lex.yy.c y.tab.c -ll typetable.c globalsymboltable.c -o xpl
+ gcc lex.yy.c y.tab.c -ll typetable.c globalsymboltable.c nodetype.c -o xpl
