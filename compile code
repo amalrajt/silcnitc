@@ -1,0 +1,5 @@
+lex xpl.l
+yacc xpl.y -dd 
+gcc y.tab.c lex.yy.c globalsymboltable.c typetable.c -ll -o xpl
+./xpl sample_code.xpl
+./a.out temp.xsm

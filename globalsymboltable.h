@@ -16,6 +16,7 @@
     int numArgs;
     struct Lsymbol *lsymbols;
     struct Gsymbol *next;
+    int isDefined;
   };
 //For Symbol Table
   struct Lsymbol{
@@ -71,3 +72,7 @@
   int getLocalVariableBinding(char * name,struct Lsymbol * variable);
   struct Lsymbol * getLocalTableEntry(char * name,struct Lsymbol * variable);
 //
+
+  int checkMultipleLocalDeclaration(struct Lsymbol * head1);
+  int checkMultipleDeclaration();
+  void initializeRegister();

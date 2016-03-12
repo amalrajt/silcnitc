@@ -7,6 +7,7 @@ extern FILE *yyin;
 extern int regCount;
 extern FILE *fp;
 
+//extern struct Gsymbol * GsymbolHead;
 //For Debugging
     int lineNumber=1;
 
@@ -95,6 +96,12 @@ extern FILE *fp;
     start : 
         DECL decl_statement_list ENDDECL Fdef_list END     
                                         {
+                                            if(isAllDefined() == 0){
+                                                return 0;
+                                            }
+                                            if(checkMultipleDeclaration() == 1){
+                                                return 0;
+                                            }
                                             printAllVariables();
                                             return 0;
                                         } 
@@ -184,6 +191,7 @@ extern FILE *fp;
                                         }
         | Fname '(' Farg_list ')'       {
                                             $$ = installFunction($1,$3,NULL,NULL);
+                                            $$->isDefined = 0;
                                         }
         ;
 
@@ -225,6 +233,10 @@ extern FILE *fp;
                                                 printf("Undeclared Function %s",$2);
                                                 return 0;
                                             }
+                                            if(checkMultipleLocalDeclaration(symbolTableEntry->lsymbols) == 1){
+                                                printf("Error in Function %s",$2);
+                                                return 0;
+                                            }
                                             if(!isCorrectDeclaration($4,symbolTableEntry->args)){
                                                 printf("Invalid Arguments for Function %s\n",$2);
                                                 return 0;
@@ -233,12 +245,14 @@ extern FILE *fp;
                                                 printf("No return statement for Function %s\n",$2);
                                                 return 0;
                                             }
+                                            symbolTableEntry->isDefined = 1;
                                             //printAllVariables();
                                             //installFunction($2,$4,typeTableTuple,$8);
                                             currLocalTable = symbolTableEntry->lsymbols;
                                             currFunction   = symbolTableEntry;
                                             
                                             if(analyse($11)){
+                                                initializeRegister();
                                                 fprintf(fp,"MOV R0, R0//\tFunction %s Begins here\n",$2);
                                                 fprintf(fp,"%s:\n",$2);
                                                 fprintf(fp,"PUSH BP\n");
@@ -249,6 +263,7 @@ extern FILE *fp;
                                             }
                                             else{
                                                 printf("ERROR in Function %s\n",$2);
+                                                return 0;
                                             }
                                         }
         |BOOL Fname '(' Farg_list ')' '{' DECL ldecl_statement_list ENDDECL START statement_list END'}'
@@ -278,6 +293,7 @@ extern FILE *fp;
                                                 printf("No return statement for Function %s\n",$2);
                                                 return 0;
                                             }
+                                            symbolTableEntry->isDefined = 1;
                                             //printAllVariables();
                                             //installFunction($2,$4,typeTableTuple,$8);
                                             currLocalTable      = symbolTableEntry->lsymbols;
@@ -294,6 +310,7 @@ extern FILE *fp;
                                             }
                                             else{
                                                 printf("ERROR in Function %s\n",$2);
+                                                return 0;
                                             }
                                         }
 
@@ -626,8 +643,8 @@ extern FILE *fp;
 
         char * copyString(char * source){
             char * destination;
-            int size = strlen(source);
-            destination = malloc(size);
+            int size        = strlen(source);
+            destination     = malloc(size);
             strcpy(destination,source);
         }
 
@@ -635,13 +652,13 @@ extern FILE *fp;
         //Variable node is a temporary data structure for creating symbol table entries
         struct variableDecl * makeVariableNode(char * name,int size){
             struct variableDecl * varNode;
-            varNode = malloc(sizeof(struct variableDecl));
+            varNode         = malloc(sizeof(struct variableDecl));
             if(!varNode){
                 outOfMemory();
             }
-            varNode->name = copyString(name);
-            varNode->size = size;
-            varNode->next = NULL;
+            varNode->name   = copyString(name);
+            varNode->size   = size;
+            varNode->next   = NULL;
             return varNode;
         }
 
@@ -649,13 +666,13 @@ extern FILE *fp;
         //Argument node is a temporary data structure for creating symbol table entries
         struct argumentDecl * makeArgumentNode(char * name){
             struct argumentDecl * argNode;
-            argNode = malloc(sizeof(struct argumentDecl));
+            argNode         = malloc(sizeof(struct argumentDecl));
             if(!argNode){
                 outOfMemory();
             }
-            argNode->name = copyString(name);
-            argNode->next = NULL;
-            argNode->isRef= 0;
+            argNode->name   = copyString(name);
+            argNode->next   = NULL;
+            argNode->isRef  = 0;
             return argNode;
         }
 
@@ -663,7 +680,21 @@ extern FILE *fp;
 //Expression Tree Related Functions
 
 
-
+//To check if all functions are defined
+        int isAllDefined(){
+            struct Gsymbol * head;
+            head = GsymbolHead;
+            while(head){
+                if(head->size == 0){
+                    if(head->isDefined == 0){
+                        printf("Error : Function %s declared but not defined\n", head->name);
+                        return 0;
+                    }
+                }
+                head = head->next;
+            }
+            return 1;
+        }
 
 
 
@@ -700,7 +731,7 @@ extern FILE *fp;
         fprintf(fp,"CALL MAIN\n");
         fprintf(fp,"HALT\n");
         if(argc>1){
-                readFile(argv[1]);
+            readFile(argv[1]);
         }
         else{
             readInput();

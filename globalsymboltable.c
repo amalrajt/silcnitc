@@ -295,10 +295,47 @@ int isCorrectDeclaration(struct argList * argument,struct argList * actualArgume
 		if((strcmp(head->name,actualHead->name)!=0)||(head->type != actualHead->type)){
 			break;
 		}
+		if(head->isRef != actualHead->isRef){
+			break;
+		}
 		head 		= head->next;
 		actualHead 	= actualHead->next;
 	}
 	if(head || actualHead)
 		return 0;
 	return 1;
+}
+
+int checkMultipleDeclaration(){
+	struct Gsymbol * head1;
+	struct Gsymbol * head2;
+	head1 = GsymbolHead;
+	head2 = GsymbolHead->next;
+	while(head1){
+		while(head2){
+			if(strcmp(head1->name,head2->name) == 0){
+				printf("Error : Multiple declarations for %s\n",head1->name);
+				return 1;
+			}
+			head2 = head2->next;
+		}
+		head1 = head1->next;
+	}
+	return 0;
+}
+
+int checkMultipleLocalDeclaration(struct Lsymbol * head1){
+	struct Lsymbol * head2;
+	head2 = head1->next;
+	while(head1){
+		while(head2){
+			if(strcmp(head1->name,head2->name) == 0){
+				printf("Error : Multiple declarations for %s\n",head1->name);
+				return 1;
+			}
+			head2 = head2->next;
+		}
+		head1 = head1->next;
+	}
+	return 0;
 }
