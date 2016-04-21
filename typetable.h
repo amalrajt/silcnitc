@@ -30,4 +30,8 @@
     int getDataTypeSize(char *dataType);
     //struct typeTable * getTypeTuple(char * name);
     struct typeTable * getTypeTuple(char * dataType);
+    struct typeTable * installType(char * name,struct Fieldlist * fields);
+    int getAttributeBinding(char * name,struct typeTable * type);
+
+    struct Fieldlist * installFieldList(char * name,struct typeTable * typeTuple);
 

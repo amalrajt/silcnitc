@@ -20,7 +20,7 @@ comment         [.\n]+
 
                                         }
 
-[-+*/%()=<>{};,&]                       {
+[-+*/%()=<>{};.,&]                       {
                                             return *yytext;
                                         }
 
@@ -92,6 +92,14 @@ ENDWHILE|endwhile                       {
                                             return ENDWHILE;
                                         }
 
+READMEM|readmem                         {
+                                            return READMEM;
+                                        }
+
+WRITEMEM|writemem                       {
+                                            return WRITEMEM;
+                                        }
+
 DECL|decl                               {
                                             return DECL;
                                         }
@@ -118,6 +126,14 @@ MAIN|main                               {
 
 RETURN|return                           {
                                             return RETURN;
+                                        }
+
+TYPE|type                               {
+                                            return TYPE;
+                                        }
+
+ENDTYPE|endtype                         {
+                                            return ENDTYPE;
                                         }
 
 {idChars}+                              {

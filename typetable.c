@@ -51,9 +51,9 @@
 	//Fuction For Creating Basic Data Types {int,str,bool}
 	void makeBasicTypeTable(){
 		//printf("Reached Here");
-		createTypeTableHead("int",4);
+		createTypeTableHead("integer",1);
 		addNewTypeTableEntry("char",1);
-		addNewTypeTableEntry("boolean",4);
+		addNewTypeTableEntry("boolean",1);
 	}
 		//Function To Get Size of data type from Type Table
 	int getDataTypeSize(char *dataType){
@@ -67,12 +67,47 @@
 		}
 		return 0;
 	}
-		//To Print Type Table Entries (For Debugging)
+	struct typeTable * installType(char * name,struct Fieldlist * fields){
+		typeTableTail->next = newTypeTuple();
+		typeTableTail = typeTableTail->next;
+		typeTableTail->fields = fields;
+		typeTableTail->name = name;
+	}
+
+	struct Fieldlist * installFieldList(char * name,struct typeTable * typeTuple){
+		struct Fieldlist * field;
+		field = malloc(sizeof(struct Fieldlist));
+		field->name = name;
+		field->type = typeTuple;
+		field->next = NULL;
+		return field;
+	}
+	int getAttributeBinding(char * name,struct typeTable * type){
+		struct Fieldlist * fields;
+		fields = type->fields;
+		int ret = 0;
+		while(fields){
+			if(strcmp(fields->name,name) == 0){
+				return ret;
+			}
+			ret += 1;
+			fields = fields->next;
+		}
+		return -1;
+	}
+	//To Print Type Table Entries (For Debugging)
 	void printTypeTable(){
 		struct typeTable *t;
 		t = typeTableHead;
 		while(t){
-			printf("%s",t->name);
+			printf("%s\n",t->name);
+			struct Fieldlist * field;
+			field = t->fields;
+			while(field){
+				printf("\t%s\n",field->name);
+				printf("\t\t type - %s , size - %d\n",field->type->name,field->type->size);
+				field = field->next;
+			}
 			t=t->next;
 		}
 	}

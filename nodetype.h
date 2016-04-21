@@ -10,6 +10,11 @@ typedef struct {
     int type;
 } conNodeType; 
 
+
+struct innerVariable{
+    char * name;
+    struct innerVariable * next;
+};
 /* identifiers */ 
 typedef struct { 
     union {
@@ -19,9 +24,11 @@ typedef struct {
     };
     struct Gsymbol * GsymbolPointer;
     struct Lsymbol * LsymbolPointer;
+    struct typeTable * typeTableTuple;
     char * type;
     char * name;
     struct nodeTypeTag * expressionNode;
+    struct innerVariable * innerId;
     int isRef;
 } idNodeType; 
 
@@ -73,6 +80,8 @@ typedef struct nodeTypeTag NodeType;
     struct nodeTypeTag * makeFunctionNode(char * funcName, struct fArgExpression * fArgs);
 //Basic Functions
     char * copyString(char * source);
+    struct nodeTypeTag * makeInnerVar(struct nodeTypeTag * Id,char * name);
+    struct typeTable * getFieldType(char * name,struct typeTable * type);
 
     extern int lineNumber;
 

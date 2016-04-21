@@ -1,0 +1,794 @@
+START
+MOV SP, 1535
+MOV BP, 1535
+CALL MAIN
+HALT
+MOV R0, R0//	Function initialize Begins here
+initialize:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing local variable p binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+LABEL1:
+MOV R0, R0//	Accessing local variable p binding 2
+MOV R1, 2
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 100
+LT R1, R2
+JZ R1, LABEL2
+MOV R0, R0//	Accessing local variable r binding 1 for =
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0 // Writing to Memory
+MOV R0, R0//	Accessing local variable strt binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing local variable p binding 2
+MOV R2, 2
+MOV R3, BP
+ADD R2, R3
+MOV R2, [R2]
+MOV R3, 10
+MUL R2, R3
+ADD R1, R2
+MOV R2, 9
+ADD R1, R2
+MOV R2, 0
+MOV [R1], R2
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable p binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable p binding 2
+MOV R1, 2
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 1
+ADD R1, R2
+MOV [R0], R1
+JMP LABEL1
+LABEL2:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, 0
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function initialize ends here
+MOV R0, R0//	Function alloc Begins here
+alloc:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing local variable strt binding -3 for =
+MOV R0, -3
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable value binding 1 for =
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable p binding 3 for =
+MOV R0, 3
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+LABEL3:
+MOV R0, R0//	Accessing local variable p binding 3
+MOV R1, 3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 100
+LT R1, R2
+JZ R1, LABEL4
+MOV R0, R0//	Accessing local variable r binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0 // Reading Memory
+MOV R0, R0//	Accessing local variable strt binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing local variable p binding 3
+MOV R2, 3
+MOV R3, BP
+ADD R2, R3
+MOV R2, [R2]
+MOV R3, 10
+MUL R2, R3
+ADD R1, R2
+MOV R2, 9
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable r binding 2
+MOV R1, 2
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 0
+EQ R1, R2
+JZ R1, LABEL5
+MOV R0, R0//	Accessing local variable r binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0 // Writing to Memory
+MOV R0, R0//	Accessing local variable strt binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing local variable p binding 3
+MOV R2, 3
+MOV R3, BP
+ADD R2, R3
+MOV R2, [R2]
+MOV R3, 10
+MUL R2, R3
+ADD R1, R2
+MOV R2, 9
+ADD R1, R2
+MOV R2, 1
+MOV [R1], R2
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable value binding 1 for =
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable strt binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing local variable p binding 3
+MOV R2, 3
+MOV R3, BP
+ADD R2, R3
+MOV R2, [R2]
+MOV R3, 10
+MUL R2, R3
+ADD R1, R2
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, R0//	Accessing local variable value binding 1
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+JMP LABEL6
+LABEL5:
+LABEL6:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable p binding 3 for =
+MOV R0, 3
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable p binding 3
+MOV R1, 3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 1
+ADD R1, R2
+MOV [R0], R1
+JMP LABEL3
+LABEL4:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, R0//	Accessing local variable value binding 1
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function alloc ends here
+MOV R0, R0//	Function free Begins here
+free:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing local variable value binding 1 for =
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable r binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0 // Writing to Memory
+MOV R0, R0//	Accessing local variable position binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 9
+ADD R1, R2
+MOV R2, 0
+MOV [R1], R2
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, R0//	Accessing local variable value binding 1
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function free ends here
+MOV R0, R0//	Function readlist Begins here
+readlist:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing Global variable i binding 0 for =
+MOV R0, 0
+MOV R1, 1000
+ADD R0, R1
+MOV R1, 0
+ADD R0, R1
+MOV R1, 1
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable head binding -3 for =
+MOV R0, -3
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function alloc
+MOV R1, 0
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL alloc
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable head binding -3
+MOV R0, -3
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R0, R0//	Accessing attribute x binding 1
+MOV R1, 1
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable tail binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable head binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+LABEL8:
+MOV R0, R0//	Accessing global variable i binding 0
+MOV R1, 0
+MOV R2, 1000
+ADD R1, R2
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 0
+GT R1, R2
+JZ R1, LABEL9
+MOV R0, 0
+MOV R1, 0
+MOV R2, 1000
+ADD R1, R2
+ADD R0, R1
+IN R1
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing global variable i binding 0
+MOV R1, 0
+MOV R2, 1000
+ADD R1, R2
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 0
+GT R1, R2
+JZ R1, LABEL10
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable tail binding 2
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R0, R0//	Accessing attribute x binding 1
+MOV R1, 1
+ADD R0, R1
+MOV R0, R0//	Accessing global variable i binding 0
+MOV R1, 0
+MOV R2, 1000
+ADD R1, R2
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable tail binding 2
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function alloc
+MOV R1, 0
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL alloc
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable tail binding 2 for =
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable tail binding 2
+MOV R1, 2
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable tail binding 2
+MOV R0, 2
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R0, R0//	Accessing attribute x binding 1
+MOV R1, 1
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+JMP LABEL11
+LABEL10:
+LABEL11:
+JMP LABEL8
+LABEL9:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, 1
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function readlist ends here
+MOV R0, R0//	Function revlist Begins here
+revlist:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable header binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 0
+GT R1, R2
+JZ R1, LABEL13
+MOV R0, R0//	Accessing local variable p binding 1 for =
+MOV R0, 1
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function revlist
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable header binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL revlist
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable header binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing attribute x binding 1
+MOV R2, 1
+ADD R1, R2
+MOV R1, [R1]
+OUT R1
+JMP LABEL14
+LABEL13:
+LABEL14:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, 1
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function revlist ends here
+MOV R0, R0//	Function printrev Begins here
+printrev:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing local variable curr binding 5 for =
+MOV R0, 5
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable header binding -3
+MOV R1, -3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable prev binding 3 for =
+MOV R0, 3
+MOV R1, BP
+ADD R0, R1
+MOV R1, 0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+LABEL16:
+MOV R0, R0//	Accessing local variable curr binding 5
+MOV R1, 5
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R2, 0
+GT R1, R2
+JZ R1, LABEL17
+MOV R0, R0//	Accessing local variable next binding 4 for =
+MOV R0, 4
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable curr binding 5
+MOV R1, 5
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Attribute Problem
+MOV R0, R0//	Accessing local variable curr binding 5
+MOV R0, 5
+MOV R1, BP
+ADD R0, R1
+MOV R0, [R0]
+MOV R0, R0//	Accessing attribute next binding 0
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Accessing local variable prev binding 3
+MOV R1, 3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable prev binding 3 for =
+MOV R0, 3
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable curr binding 5
+MOV R1, 5
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable curr binding 5 for =
+MOV R0, 5
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable next binding 4
+MOV R1, 4
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+JMP LABEL16
+LABEL17:
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing local variable header binding -3 for =
+MOV R0, -3
+MOV R1, BP
+ADD R0, R1
+MOV R0, R0//	Accessing local variable prev binding 3
+MOV R1, 3
+MOV R2, BP
+ADD R1, R2
+MOV R1, [R1]
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, 1
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function printrev ends here
+MOV R0, R0//	Function MAIN Begins here
+MAIN:
+PUSH BP
+MOV BP,SP
+MOV R0, R0//	 Pushing for Local variables
+MOV R1, 0
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+PUSH R1
+MOV R0, R0//	Accessing Global variable i binding 0 for =
+MOV R0, 0
+MOV R1, 1000
+ADD R0, R1
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function initialize
+MOV R1, 0
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL initialize
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing Global variable i binding 0 for =
+MOV R0, 0
+MOV R1, 1000
+ADD R0, R1
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function alloc
+MOV R1, 0
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL alloc
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing Global variable i binding 0 for =
+MOV R0, 0
+MOV R1, 1000
+ADD R0, R1
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function readlist
+MOV R0, R0//	Accessing global variable head binding 1
+MOV R1, 1
+MOV R2, 1000
+ADD R1, R2
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL readlist
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+MOV R0, R0//	Call By Reference Problem
+POP R2
+MOV R0, R0//	Accessing global variable head binding 1
+MOV R3, 1
+MOV R4, 1000
+ADD R3, R4
+MOV R4, 0
+ADD R3, R4
+MOV [R3], R2
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Accessing Global variable i binding 0 for =
+MOV R0, 0
+MOV R1, 1000
+ADD R0, R1
+MOV R1, 0
+ADD R0, R1
+MOV R0, R0//	Pushing All Used Registers(0)
+PUSH R0
+MOV R0, R0//	Calling Function revlist
+MOV R0, R0//	Accessing global variable head binding 1
+MOV R1, 1
+MOV R2, 1000
+ADD R1, R2
+MOV R2, 0
+ADD R1, R2
+MOV R1, [R1]
+PUSH R1
+MOV R0, R0//	For return Address
+PUSH R0
+CALL revlist
+MOV R0, R0//	To Get The Return Value
+POP R1
+MOV R0, R0//	Removing Arguments
+POP R0
+MOV R0, R0//	Restoring Registers
+POP R0
+MOV [R0], R1
+MOV R0, R0//	End of Statement
+MOV R0, R0//	Return Statement Begins Here
+MOV R0, 1
+MOV R1, BP
+MOV R2, -2
+ADD R1, R2
+MOV [R1], R0
+MOV SP, BP
+POP BP
+RET
+MOV R0, R0//	Function MAIN ends here
+HALT

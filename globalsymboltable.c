@@ -154,7 +154,7 @@ struct variablePointer * newVariablePointer(char * type){
 	varPointer = malloc(sizeof(struct variablePointer));
 	varPointer->type = malloc(strlen(type)+1);
 	strcpy(varPointer->type,type);
-	if(strcmp(type,"int") == 0){
+	if(strcmp(type,"integer") == 0){
 		varPointer->intPointer = NULL;
 	}
 	else if(strcmp(type,"char") == 0){
@@ -171,7 +171,7 @@ struct variablePointer * newVariablePointer(char * type){
 	Inputs : pointer to variable binding , pointer to the value to be copied to the variable{ both of type variablePointer }
 */
 void writeToVariable(struct variablePointer *varPointer,struct variablePointer *writeBufferPointer){
-	if(strcmp(varPointer->type,"int") == 0){
+	if(strcmp(varPointer->type,"integer") == 0){
 		*varPointer->intPointer 	= *writeBufferPointer->intPointer;
 	}
 	else if(strcmp(varPointer->type,"char") == 0){
