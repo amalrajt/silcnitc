@@ -335,36 +335,101 @@ int evaluate(struct nodeTypeTag *p){
                                 idNode      = argExpRev->exprNode;
                                 binding     = getLocalVariableBinding(idNode->id.name,currLocalTable);
                                 if( binding != 0){
-                                    getRegister();
-                                    getRegister();
-                                    fprintf(fp, "POP R%d\n",getPrevRegister());
-                                    fprintf(fp, "MOV R0, R0//\tAccessing local variable %s binding %d\n",idNode->id.name,binding);
-                                    fprintf(fp, "MOV R%d, %d\n",currentRegister,binding);
-                                    getRegister();
-                                    fprintf(fp, "MOV R%d, BP\n",currentRegister);
-                                    fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
-                                    releaseRegister();
-                                    fprintf(fp, "MOV [R%d], R%d\n",currentRegister,getPrevRegister());
-                                    releaseRegister();
-                                    releaseRegister();
+                                    if(idNode->id.innerId){
+                                        fprintf(fp, "MOV R0, R0//\tAttribute Problem\n");
+                                        getRegister();
+                                        fprintf(fp, "POP R%d\n",currentRegister);
+                                        fprintf(fp, "MOV R0, R0//\tAccessing local variable %s binding %d\n",idNode->id.name,binding);
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, %d\n", currentRegister,binding);
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, BP\n",currentRegister);
+                                        fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
+                                        releaseRegister();
+                                        fprintf(fp, "MOV R%d, [R%d]\n",currentRegister,currentRegister);
+                                        head = idNode->id.innerId;
+                                        idNode->id.LsymbolPointer = getLocalTableEntry(idNode->id.name,currLocalTable);
+                                        type = idNode->id.LsymbolPointer->type;
+                                        while(head){
+                                            fprintf(fp,"MOV R0, R0//\tAccessing attribute %s binding %d\n",head->name,getAttributeBinding(head->name,type));
+                                            getRegister();
+                                            fprintf(fp, "MOV R%d, %d\n", currentRegister,(getAttributeBinding(head->name,type)));
+                                            fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(), currentRegister);
+                                            releaseRegister();
+                                            if(head->next)
+                                            fprintf(fp, "MOV R%d, [R%d]\n",currentRegister,currentRegister);
+                                            type = getFieldType(head->name,type);
+                                        
+                                            head = head->next;
+                                        }
+
+                                        fprintf(fp, "MOV [R%d], R%d\n",currentRegister,getPrevRegister());
+                                        releaseRegister();
+                                        releaseRegister();
+
+                                    }
+                                    else{
+                                        getRegister();
+                                        getRegister();
+                                        fprintf(fp, "POP R%d\n",getPrevRegister());
+                                        fprintf(fp, "MOV R0, R0//\tAccessing local variable %s binding %d\n",idNode->id.name,binding);
+                                        fprintf(fp, "MOV R%d, %d\n",currentRegister,binding);
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, BP\n",currentRegister);
+                                        fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
+                                        releaseRegister();
+                                        fprintf(fp, "MOV [R%d], R%d\n",currentRegister,getPrevRegister());
+                                        releaseRegister();
+                                        releaseRegister();
+                                    }
                                 }
                                 //If variable is not in Local Table
                                 else{
-                                    getRegister();
-                                    fprintf(fp, "POP R%d\n",currentRegister);
-                                    fprintf(fp, "MOV R0, R0//\tAccessing global variable %s binding %d\n",idNode->id.name,getVariableBinding(idNode->id.GsymbolPointer,0));
-                                    getRegister();
-                                    fprintf(fp, "MOV R%d, %d\n", currentRegister,(getVariableBinding(idNode->id.GsymbolPointer,0)));
-                                    getRegister();
-                                    fprintf(fp, "MOV R%d, 1000\n",currentRegister);
-                                    fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
-                                    releaseRegister();
-                                    evaluate(idNode->id.expressionNode);
-                                    fprintf(fp, "ADD R%d, R%d\n", getPrevRegister(), currentRegister);
-                                    releaseRegister();
-                                    fprintf(fp, "MOV [R%d], R%d\n", currentRegister,getPrevRegister());
-                                    releaseRegister();
-                                    releaseRegister();
+                                    if(idNode->id.innerId){
+                                        fprintf(fp, "MOV R0, R0//\tAttribute Problem\n");
+                                        getRegister();
+                                        fprintf(fp, "POP R%d\n",currentRegister);
+                                        fprintf(fp, "MOV R0, R0//\tAccessing global variable %s binding %d\n",idNode->id.name,getVariableBinding(idNode->id.GsymbolPointer,0));
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, %d\n", currentRegister,(getVariableBinding(idNode->id.GsymbolPointer,0)));
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, 1000\n",currentRegister);
+                                        fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
+                                        releaseRegister();
+                                        
+                                        head = p->id.innerId;
+                                        type = p->id.GsymbolPointer->type;
+                                        while(head){
+                                            fprintf(fp,"MOV R0, R0//\tAccessing attribute %s binding %d\n",head->name,getAttributeBinding(head->name,type));
+                                            getRegister();
+                                            fprintf(fp, "MOV R%d, %d\n", currentRegister,(getAttributeBinding(head->name,type)));
+                                            fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(), currentRegister);
+                                            releaseRegister();
+                                            fprintf(fp, "MOV R%d, [R%d]\n",currentRegister,currentRegister);
+                                            type = getFieldType(head->name,type);
+                                            head = head->next;
+                                        }
+
+                                        fprintf(fp, "MOV [R%d], R%d\n",currentRegister,getPrevRegister());
+
+                                    }
+                                    else{
+                                        getRegister();
+                                        fprintf(fp, "POP R%d\n",currentRegister);
+                                        fprintf(fp, "MOV R0, R0//\tAccessing global variable %s binding %d\n",idNode->id.name,getVariableBinding(idNode->id.GsymbolPointer,0));
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, %d\n", currentRegister,(getVariableBinding(idNode->id.GsymbolPointer,0)));
+                                        getRegister();
+                                        fprintf(fp, "MOV R%d, 1000\n",currentRegister);
+                                        fprintf(fp, "ADD R%d, R%d\n",getPrevRegister(),currentRegister);
+                                        releaseRegister();
+                                        evaluate(idNode->id.expressionNode);
+                                        fprintf(fp, "ADD R%d, R%d\n", getPrevRegister(), currentRegister);
+                                        releaseRegister();
+                                        fprintf(fp, "MOV [R%d], R%d\n", currentRegister,getPrevRegister());
+                                        releaseRegister();
+                                        releaseRegister();
+                                    }
                                 }
                             
                             }

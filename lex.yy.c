@@ -437,7 +437,7 @@ static yyconst flex_int32_t yy_ec[256] =
 
 static yyconst flex_int32_t yy_meta[54] =
     {   0,
-        1,    1,    1,    2,    1,    1,    1,    2,    3,    3,
+        1,    1,    2,    2,    1,    1,    1,    2,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
         3,    3,    3,    3,    3,    3,    3,    3,    3,    1,
         1,    4,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -586,8 +586,15 @@ char *yytext;
 #include "y.tab.h"
 #include <stdlib.h>
 #include <stdio.h>
+struct fileNodes{
+    char * filename;
+    struct fileNodes * next;
+};
 extern int lineNumber;
-#line 591 "lex.yy.c"
+int preprocessed = 0;
+struct fileNodes * fileHeader;
+char * filename;
+#line 598 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -774,10 +781,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 12 "xpl.l"
+#line 19 "xpl.l"
 
 
-#line 781 "lex.yy.c"
+#line 788 "lex.yy.c"
 
 	if ( !(yy_init) )
 		{
@@ -862,7 +869,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 14 "xpl.l"
+#line 21 "xpl.l"
 {
                                             yylval.iValue = atoi (yytext);
                                             return NUMBER;
@@ -870,217 +877,217 @@ YY_RULE_SETUP
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 19 "xpl.l"
+#line 26 "xpl.l"
 {
 
                                         }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 23 "xpl.l"
+#line 30 "xpl.l"
 {
                                             return *yytext;
                                         }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 27 "xpl.l"
+#line 34 "xpl.l"
 {
                                             return *yytext;
                                         }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 31 "xpl.l"
+#line 38 "xpl.l"
 {
                                             return READ;
                                         }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "xpl.l"
+#line 42 "xpl.l"
 {
                                             return WRITE;
                                         }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 39 "xpl.l"
+#line 46 "xpl.l"
 {
                                             return IF;
                                         }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 43 "xpl.l"
+#line 50 "xpl.l"
 {
                                             return THEN;
                                         }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 47 "xpl.l"
+#line 54 "xpl.l"
 {
                                             return ELSE;
                                         }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 51 "xpl.l"
+#line 58 "xpl.l"
 {
                                             return ENDIF;
                                         }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 55 "xpl.l"
+#line 62 "xpl.l"
 {
                                             return AND;
                                         }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 59 "xpl.l"
+#line 66 "xpl.l"
 {
                                             return OR;
                                         }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 63 "xpl.l"
+#line 70 "xpl.l"
 {
                                             return NOT;
                                         }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 67 "xpl.l"
+#line 74 "xpl.l"
 {
                                             return TRUE;
                                         }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 71 "xpl.l"
+#line 78 "xpl.l"
 {
                                             return FALSE;
                                         }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 75 "xpl.l"
+#line 82 "xpl.l"
 {
                                             return END;
                                         }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 79 "xpl.l"
+#line 86 "xpl.l"
 {
                                             return START;
                                         }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 83 "xpl.l"
+#line 90 "xpl.l"
 {
                                             return WHILE;
                                         }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 87 "xpl.l"
+#line 94 "xpl.l"
 {
                                             return DO;
                                         }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 91 "xpl.l"
+#line 98 "xpl.l"
 {
                                             return ENDWHILE;
                                         }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 95 "xpl.l"
+#line 102 "xpl.l"
 {
                                             return READMEM;
                                         }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 99 "xpl.l"
+#line 106 "xpl.l"
 {
                                             return WRITEMEM;
                                         }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 103 "xpl.l"
+#line 110 "xpl.l"
 {
                                             return DECL;
                                         }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 107 "xpl.l"
+#line 114 "xpl.l"
 {
                                             return INT;
                                         }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 111 "xpl.l"
+#line 118 "xpl.l"
 {
                                             return CHAR;
                                         }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 115 "xpl.l"
+#line 122 "xpl.l"
 {
                                             return BOOL;
                                         }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 119 "xpl.l"
+#line 126 "xpl.l"
 {
                                             return ENDDECL;
                                         }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 123 "xpl.l"
+#line 130 "xpl.l"
 {
                                             return MAIN;
                                         }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 127 "xpl.l"
+#line 134 "xpl.l"
 {
                                             return RETURN;
                                         }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 131 "xpl.l"
+#line 138 "xpl.l"
 {
                                             return TYPE;
                                         }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 135 "xpl.l"
+#line 142 "xpl.l"
 {
                                             return ENDTYPE;
                                         }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 139 "xpl.l"
+#line 146 "xpl.l"
 {
                                             char * identifier;
                                             identifier = malloc(yyleng + 1);
@@ -1091,7 +1098,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 147 "xpl.l"
+#line 154 "xpl.l"
 {
                                             
                                         }
@@ -1099,24 +1106,25 @@ YY_RULE_SETUP
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 151 "xpl.l"
+#line 158 "xpl.l"
 {
                                             lineNumber += 1;
                                         }
 	YY_BREAK
 case 35:
+/* rule 35 can match eol */
 YY_RULE_SETUP
-#line 156 "xpl.l"
+#line 163 "xpl.l"
 {
 
                                         }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 159 "xpl.l"
+#line 166 "xpl.l"
 ECHO;
 	YY_BREAK
-#line 1120 "lex.yy.c"
+#line 1128 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2114,12 +2122,24 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 159 "xpl.l"
+#line 166 "xpl.l"
 
 
 
-int yywrap(){
-    return 1;
+int yywrap()
+{
+    if(!fileHeader->next){
+        return 1;
+    }
+    fileHeader = fileHeader->next;
+    printf("Processing %s",fileHeader->filename);
+    FILE *sourceCode = fopen(fileHeader->filename, "r");
+    extern FILE *yyin;
+    yyin = sourceCode;
+    filename = NULL;
+    lineNumber = 0;
+    return 0;
 }
+
 
 

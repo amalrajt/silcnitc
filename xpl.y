@@ -4,14 +4,23 @@
 #include <stdbool.h>
 #include "nodetype.h"
 #define INVALID -22
+struct fileNodes{
+    char * filename;
+    struct fileNodes * next;
+};
 extern FILE *yyin;
 extern int regCount;
+extern int preprocessed;
+extern char * filename;
+extern struct fileNodes * fileHeader;
 extern FILE *fp;
 
 //extern struct Gsymbol * GsymbolHead;
 //For Debugging
     int lineNumber=1;
 
+
+    void preprocess(char * filename);
 
 //For the current Local symbol Table
     struct Lsymbol * currLocalTable;
@@ -104,7 +113,18 @@ extern FILE *fp;
 %%
 
     start : 
-        TYPE type_declaration_list ENDTYPE DECL decl_statement_list ENDDECL Fdef_list END     
+        DECL TYPE type_declaration_list ENDTYPE DECL decl_statement_list ENDDECL Fdef_list END
+                                        {
+                                            if(isAllDefined() == 0){
+                                                return 0;
+                                            }
+                                            if(checkMultipleDeclaration() == 1){
+                                                return 0;
+                                            }
+                                            //printTypeTable();
+                                        }
+
+        |start TYPE type_declaration_list ENDTYPE DECL decl_statement_list ENDDECL Fdef_list END     
                                         {
                                             if(isAllDefined() == 0){
                                                 return 0;
@@ -705,6 +725,11 @@ extern FILE *fp;
         | RETURN expr ';'               {
                                             $$ = makeOperationNode('^',1,$2);
                                         }
+        | Fname '(' FcallExpressions ')' ';'
+                                        {
+                                            $$ = makeFunctionNode($1,$3);
+                                            //printf("%s\n",$1);
+                                        }
 
         ;
 
@@ -903,10 +928,20 @@ extern FILE *fp;
             yyparse();
         }
         void readFile(char *filename){
+            /*
+            FILE *sourceCode = fopen(filename, "r");
+            extern FILE *yyin;
+            yyin = sourceCode;
+            */
+            //yyparse();
+        }
+        void preprocess(char * filename){
             FILE *sourceCode = fopen(filename, "r");
             extern FILE *yyin;
             yyin = sourceCode;
             yyparse();
+            printf("I'm Done");
+            lineNumber = 0;
         }
         void outOfMemory(){
             yyerror("Out of Memory");
@@ -916,6 +951,9 @@ extern FILE *fp;
 
     int main(int argc,char *argv[])
     {
+        struct fileNodes * fileNamePoi;
+        struct fileNodes * fileNamePoiTemp;
+        int counter;
         makeBasicTypeTable();
         fp=fopen("temp.xsm","wb");
         fprintf(fp,"START\n");
@@ -923,11 +961,27 @@ extern FILE *fp;
         fprintf(fp,"MOV BP, 1535\n");
         fprintf(fp,"CALL MAIN\n");
         fprintf(fp,"HALT\n");
-        if(argc>1){
-            readFile(argv[1]);
+        if(argc==1){
+            readInput();
         }
         else{
-            readInput();
+            fileNamePoi = malloc(sizeof(struct fileNodes));
+            fileNamePoi->filename = argv[1];
+            fileNamePoi->next = NULL;
+            fileHeader = fileNamePoi;
+            counter = 2;
+            while(counter < argc){
+                fileNamePoiTemp = malloc(sizeof(struct fileNodes));
+                fileNamePoiTemp->filename = argv[counter];
+                fileNamePoiTemp->next = NULL;
+                fileNamePoi->next = fileNamePoiTemp;
+                fileNamePoi = fileNamePoiTemp;
+                counter++;
+            }
+            filename = argv[1];
+            //preprocess();
+            //readFile(argv[1]);
+            preprocess(fileHeader->filename);
         }
         fprintf(fp,"HALT\n");
         return 1;

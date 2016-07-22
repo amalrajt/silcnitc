@@ -2,7 +2,14 @@
 #include "y.tab.h"
 #include <stdlib.h>
 #include <stdio.h>
+struct fileNodes{
+    char * filename;
+    struct fileNodes * next;
+};
 extern int lineNumber;
+int preprocessed = 0;
+struct fileNodes * fileHeader;
+char * filename;
 %}
 
 number          [0-9]+
@@ -153,12 +160,24 @@ ENDTYPE|endtype                         {
                                         }
 
 
-"/*"([a-z]|[0-9]|[A-Z]|" ")+"*/"        {
+"/*"([a-z]|[0-9]|[A-Z]|" "|\n)+"*/"        {
 
                                         }
 %%
 
-int yywrap(){
-    return 1;
+int yywrap()
+{
+    if(!fileHeader->next){
+        return 1;
+    }
+    fileHeader = fileHeader->next;
+    printf("Processing %s",fileHeader->filename);
+    FILE *sourceCode = fopen(fileHeader->filename, "r");
+    extern FILE *yyin;
+    yyin = sourceCode;
+    filename = NULL;
+    lineNumber = 0;
+    return 0;
 }
+
 

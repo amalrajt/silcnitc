@@ -114,7 +114,7 @@ extern int yydebug;
 typedef union YYSTYPE YYSTYPE;
 union YYSTYPE
 {
-#line 34 "xpl.y" /* yacc.c:1909  */
+#line 43 "xpl.y" /* yacc.c:1909  */
  
     int iValue;                            /* integer value */ 
     char * strPointer;                     /* symbol table index */ 
